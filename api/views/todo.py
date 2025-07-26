@@ -1,20 +1,19 @@
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import action
 from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 
-from .models import Todo
-from .serializers import TaskSerializer
+from ..models import Todo
+from ..serializers import TodoSerializer
 
-# Create your views here.
 
-class TaskViewSet(ModelViewSet):
+class TodoViewSet(ModelViewSet):
     queryset = Todo.objects.all()
     permission_classes = [IsAuthenticated]
-    serializer_class = TaskSerializer
+    serializer_class = TodoSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ['title', 'description']
     filterset_fields = ['is_completed']

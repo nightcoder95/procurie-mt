@@ -1,14 +1,21 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import TaskViewSet
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
+from .views.todo import TodoViewSet
+from .views.auth import AuthViewSet
+
 
 
 router = DefaultRouter()
 
-router.register(r'todos', TaskViewSet, basename='todo')
+router.register(r'todos', TodoViewSet, basename='todo')
+router.register(r'auth', AuthViewSet, basename='auth')
 
 urlpatterns = [
-    path('/api', include(router.urls)),
+    path('api/', include(router.urls)),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 '''
