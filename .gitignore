@@ -1,0 +1,8 @@
+# Ignore pyc files
+*.pyc
+
+# Ignore SQLite dev DB
+db.sqlite3
+
+# Ignore compiled migrations
+**/migrations/*.pyc
